@@ -1,6 +1,4 @@
 from numpy import prod
-csv_file = open('input.txt', 'r').readline().split(',')
-csv_file = [int(value) for value in csv_file]
 
 
 class IntcodeInterpreter:
@@ -66,7 +64,7 @@ class IntcodeInterpreter:
     def change_input(self, input_one, input_two):
         self.intcode[1], self.intcode[2] = input_one, input_two
 
-    def find_result_inputs(self, result):
+    def find_inputs_from_result(self, result):
         for input_one in range(100):
             for input_two in range(100):
                 self.change_input(input_one, input_two)
@@ -79,4 +77,4 @@ class IntcodeInterpreter:
 advent_intcode = IntcodeInterpreter('input.txt')
 advent_intcode.process_intcode()
 advent_intcode.show_intcode()
-print(advent_intcode.find_result_inputs(19690720))
+print(advent_intcode.find_inputs_from_result(19690720))
