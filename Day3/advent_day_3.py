@@ -125,8 +125,6 @@ wire_two = Path(wire_two_steps)
 pairs = wire_one.find_crossings(wire_two)
 distances = [abs(pair[0])+abs(pair[1]) for pair in pairs]
 
-print(wire_one.path)
-print(wire_one.path_length)
 print(min(distances))
 
 crossings_paths = []
