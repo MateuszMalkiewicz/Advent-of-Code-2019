@@ -149,3 +149,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# Misinterpreted method for 2nd part
+Day3/advent_day_3_pt_2.py
