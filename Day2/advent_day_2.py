@@ -2,11 +2,11 @@ from numpy import prod
 
 
 class IntcodeInterpreter:
-    def __init__(self, file_name):
+    def __init__(self, file_name, opcode_instructions):
         self.file_name = file_name
         self.intcode = self.load_file(file_name)
         self.instruction_index = 0
-        self.opcode = {1: 'add', 2: 'multiply', 99: 'end'}
+        self.opcode = opcode_instructions
         self.instruction_length = 4
 
     def load_file(self, file_name):
@@ -24,8 +24,7 @@ class IntcodeInterpreter:
     def check_for_end(self):
         if self.check_if_in_range(self.instruction_index):
             opcode = self.opcode[self.intcode[self.instruction_index]]
-            continue_reading = False if opcode == 'end' else True
-            return continue_reading
+            return False if opcode == 'end' else True
         else:
             return False
 
@@ -79,7 +78,8 @@ class IntcodeInterpreter:
                 self.reset_intcode()
 
 
-advent_intcode = IntcodeInterpreter('input.txt')
+opcode_day_two = {1: 'add', 2: 'multiply', 99: 'end'}
+advent_intcode = IntcodeInterpreter('input.txt', opcode_day_two)
 advent_intcode.show_intcode()
 advent_intcode.process_intcode()
 advent_intcode.show_intcode()
