@@ -2,19 +2,19 @@ from numpy import prod
 
 
 class IntcodeInterpreter:
-    def __init__(self, file_name, opcode_instructions):
+    def __init__(self, file_name):
         self.file_name = file_name
-        self.intcode = self.load_file(file_name)
+        self.intcode = self.load_file()
+        self.opcode = {1: 'add', 2: 'multiply', 99: 'end'}
         self.instruction_index = 0
-        self.opcode = opcode_instructions
         self.instruction_length = 4
 
-    def load_file(self, file_name):
-        intcode = list(map(lambda x: int(x), open(file_name, 'r').readline().split(',')))
+    def load_file(self):
+        intcode = list(map(lambda x: int(x), open(self.file_name, 'r').readline().split(',')))
         return intcode
 
     def reset_intcode(self):
-        self.intcode = self.load_file(self.file_name)
+        self.intcode = self.load_file()
         self.instruction_index = 0
 
     def check_if_in_range(self, instruction_address):
@@ -37,11 +37,6 @@ class IntcodeInterpreter:
         args_addresses = self.find_args_addresses()
         return self.intcode[args_addresses[0]], self.intcode[args_addresses[1]]
 
-    def opcode_result(self):
-        arguments = self.find_arguments()
-        opcode = self.opcode[self.intcode[self.instruction_index]]
-        return self.opcode_interpreter(opcode, arguments)
-
     @staticmethod
     def opcode_interpreter(opcode, arguments):
         if opcode == 'add':
@@ -50,6 +45,11 @@ class IntcodeInterpreter:
             return prod(arguments)
         else:
             pass
+
+    def opcode_result(self):
+        arguments = self.find_arguments()
+        opcode = self.opcode[self.intcode[self.instruction_index]]
+        return self.opcode_interpreter(opcode, arguments)
 
     def result_destination_address(self):
         return self.intcode[self.instruction_index+3]
@@ -78,9 +78,9 @@ class IntcodeInterpreter:
                 self.reset_intcode()
 
 
-opcode_day_two = {1: 'add', 2: 'multiply', 99: 'end'}
-advent_intcode = IntcodeInterpreter('input.txt', opcode_day_two)
-advent_intcode.show_intcode()
-advent_intcode.process_intcode()
-advent_intcode.show_intcode()
-print(advent_intcode.find_inputs_from_result(19690720))
+if __name__ == '__main__':
+    advent_intcode = IntcodeInterpreter('input.txt')
+    advent_intcode.show_intcode()
+    advent_intcode.process_intcode()
+    advent_intcode.show_intcode()
+    print(advent_intcode.find_inputs_from_result(19690720))
