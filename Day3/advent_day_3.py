@@ -118,18 +118,19 @@ class Path:
         return crossings
 
 
-wire_one_steps = [Step(step_info) for step_info in path_one_steps]
-wire_two_steps = [Step(step_info) for step_info in path_two_steps]
-wire_one = Path(wire_one_steps)
-wire_two = Path(wire_two_steps)
-pairs = wire_one.find_crossings(wire_two)
-distances = [abs(pair[0])+abs(pair[1]) for pair in pairs]
+if __name__ == '__main__':
+    wire_one_steps = [Step(step_info) for step_info in path_one_steps]
+    wire_one = Path(wire_one_steps)
+    wire_two_steps = [Step(step_info) for step_info in path_two_steps]
+    wire_two = Path(wire_two_steps)
+    pairs = wire_one.find_crossings(wire_two)
+    distances = [abs(pair[0])+abs(pair[1]) for pair in pairs]
 
-print(min(distances))
+    print(min(distances))
 
-crossings_paths = []
-for point in pairs:
-    crossings_paths.append(wire_one.total_path_distance_to_point(wire_two, point))
-print(min(crossings_paths))
+    crossings_paths = []
+    for point in pairs:
+        crossings_paths.append(wire_one.total_path_distance_to_point(wire_two, point))
+    print(min(crossings_paths))
 
-print(perf_counter()-start_script)
+    print(perf_counter()-start_script)

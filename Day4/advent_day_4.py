@@ -65,6 +65,7 @@ class FindPasswords:
         return passwords_amount
 
 
-puzzle_passwords = FindPasswords(password_range)
-print(puzzle_passwords.passwords_amount)
-print(puzzle_passwords.filter_passwords_without_doubles())
+if __name__ == '__main__':
+    puzzle_passwords = FindPasswords(password_range)
+    print(puzzle_passwords.passwords_amount)
+    print(puzzle_passwords.filter_passwords_without_doubles())
