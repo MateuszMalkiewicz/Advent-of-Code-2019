@@ -1,5 +1,5 @@
 import unittest
-from Day4.advent_day_4 import check_if_not_decreasing, check_for_adjacent_pair, check_for_sequences_of_two
+from day_4.advent_day_4 import check_if_not_decreasing, check_for_adjacent_pair, check_for_sequences_of_two
 
 
 class TestDayFour(unittest.TestCase):
